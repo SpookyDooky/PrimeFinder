@@ -2,12 +2,10 @@ package main;
 
 import io.WriteHandler;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-
 public class PrimeAlgorithm {
 
     private int primesFound = 0;
+    private int counter = 0;
     private int amountPrimes;
 
     private int[] list;
@@ -16,10 +14,11 @@ public class PrimeAlgorithm {
 
     public PrimeAlgorithm(int amountPrimes){
         this.amountPrimes = amountPrimes;
-        this.list = new int[amountPrimes];
+        this.list = new int[2000];
     }
 
     public void start(){
+        int startY = 0;
 
         for(int x = 2; x < 250000000;x++){
             boolean isPrime = true;
@@ -47,13 +46,14 @@ public class PrimeAlgorithm {
             }
 
             if(isPrime) {
-                for (int y = 0; y < primesFound; y++) {
+                for (int y = startY; y < counter; y++) {
                     if (list[y] > x / 2) {
                         break;
                     }
                     steps++;
                     if (x % list[y] == 0) {
                         isPrime = false;
+                        //WriteHandler.addLog("NUMBER:" + x + ", STEPS: " + steps);
                         if(steps > foulSteps) {
                             foulSteps = steps;
                         }
@@ -67,15 +67,24 @@ public class PrimeAlgorithm {
             }
 
             if(isPrime){
-                list[primesFound] = x;
+                if(primesFound < 2000) {
+                    list[primesFound] = x;
+                    counter++;
+                }
                 primesFound++;
-                WriteHandler.addLog("NUMBER:" + x + ", STEPS: " + steps);
+                //WriteHandler.addLog("NUMBER:" + x + ", STEPS: " + steps);
             }
 
             if(amountPrimes == primesFound){
-                System.out.println(foulSteps);
+                System.out.println(amountPrimes);
+                WriteHandler.addLog(amountPrimes + " " + foulSteps + " " + x);
                 break;
             }
         }
+    }
+
+
+    public void findAmountOfPrimes(long amountPrimes){
+
     }
 }
