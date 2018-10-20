@@ -53,7 +53,6 @@ public class PrimeAlgorithm {
                     steps++;
                     if (x % list[y] == 0) {
                         isPrime = false;
-                        //WriteHandler.addLog("NUMBER:" + x + ", STEPS: " + steps);
                         if(steps > foulSteps) {
                             foulSteps = steps;
                         }
@@ -71,20 +70,13 @@ public class PrimeAlgorithm {
                     list[primesFound] = x;
                     counter++;
                 }
+                WriteHandler.addLog(String.valueOf(x));
                 primesFound++;
-                //WriteHandler.addLog("NUMBER:" + x + ", STEPS: " + steps);
             }
 
             if(amountPrimes == primesFound){
-                System.out.println(amountPrimes);
-                WriteHandler.addLog(amountPrimes + " " + foulSteps + " " + x);
                 break;
             }
         }
-    }
-
-
-    public void findAmountOfPrimes(long amountPrimes){
-
     }
 }
