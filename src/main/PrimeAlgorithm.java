@@ -18,22 +18,32 @@ public class PrimeAlgorithm {
 
     public void start(){
 
-        for(int x = 0; x < 50000;x++){
+        for(int x = 2; x < 50000;x++){
             boolean isPrime = true;
             int steps = 0;
 
-            for(int z = 2; z < x; z++){
+            int increase = 1;
+            for(int z = 2; z < x; z += increase){
                 steps++;
+
                 if(x % z == 0){
                     isPrime = false;
                     break;
+                }
+
+                if(z == 3){
+                    increase = 2;
+                }
+
+                if(z == 83){
+                    increase = 3;
                 }
             }
 
             if(isPrime){
                 result.add(x);
                 primesFound++;
-                WriteHandler.addLog("PRIME:" + x + ", STEPS: " + steps);
+                WriteHandler.addLog("NUMBER:" + x + ", STEPS: " + steps);
             }
 
             if(amountPrimes == primesFound){
